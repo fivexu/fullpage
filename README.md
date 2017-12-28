@@ -32,7 +32,7 @@ components:{
 </fullpage>
 ```
 ##### isScroll
-	是否显示 布尔值 默认true显示
+	是否显示滚动条 布尔值 默认true显示
 ##### scrollTime
 	滚动开始到结束时间 数字 默认 500ms
 ##### isDots
