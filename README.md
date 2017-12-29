@@ -1,7 +1,9 @@
 # fullpage
-
-fullpage in vue.js
-
+	fullpage是基于vue.js开发的组件
+	* fullpage的大小由父级盒子大小决定所以必须保证其父级盒子充分100%,body,html都要宽高100%
+	* pc,移动端均可使用
+	* 组件自行判断终端设备,自适应移动端,并触发touch事件
+	* 屏幕大小改变时,组件自行重新渲染设备,适应当前窗口
 ## 安装
 npm install vue-fullpages --save
 
@@ -31,11 +33,11 @@ components:{
 	<!-- 所有参数按此逻辑传递-->
 </fullpage>
 ```
-##### isScroll
+#### isScroll
 	是否显示滚动条 布尔值 默认true显示
-##### scrollTime
+#### scrollTime
 	滚动开始到结束时间 数字 默认 500ms
-##### isDots
+#### isDots
 	滚动导航 仅在没有滚动条是可选择 布尔值 默认false不显示
 
 ## 回调
