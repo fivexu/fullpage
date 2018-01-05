@@ -1,11 +1,19 @@
 {
-  "name": "fullpages-vue",
-  "version": "0.0.1",
+  "name": "vue-fullpages",
+  "version": "1.0.3",
   "description": "fullpage in vue.js",
-  "main": "fullpage.vue",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fivexu/fullpage.git"
+  },
   "author": "fivexu",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fivexu/fullpage/issues"
+  },
+  "homepage": "https://github.com/fivexu/fullpage#readme"
 }

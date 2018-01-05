@@ -69,6 +69,9 @@
       },
       touchEnd() {
         this.touch.initiated = false
+        if (!this.$refs.translatePage) {
+          return
+        }
         if (this.deltaY < -20) {
           this.page++
           if (this.page >= this.$refs.translatePage.children.length) {
@@ -124,6 +127,18 @@
           }, 20)
         }
       },
+      isPC() {
+        var userAgentInfo = navigator.userAgent
+        var Agents = ['Android', 'iPhone', 'SymbianOS', 'Windows Phone', 'iPad', 'iPod']
+        var flag = true
+        for (var v = 0; v < Agents.length; v++) {
+          if (userAgentInfo.indexOf(Agents[v]) > 0) {
+            flag = false
+            break
+          }
+        }
+        return flag
+      },
       getScrollTop() {
         let scrollTop = 0
         if (document.documentElement && document.documentElement.scrollTop) {
@@ -153,7 +168,7 @@
           if (n <= y) {
             n += document.documentElement.clientHeight * 30 / time
             window.scrollTo(0, n)
-            if (n >= y) {
+            if (n > y) {
               clearInterval(timer)
               window.scrollTo(0, y)
             }
@@ -161,7 +176,7 @@
           if (n > y) {
             n -= document.documentElement.clientHeight * 30 / time
             window.scrollTo(0, n)
-            if (n <= y) {
+            if (n < y) {
               clearInterval(timer)
               window.scrollTo(0, y)
             }
@@ -197,18 +212,28 @@
         this.page = index
         this.translateTo(this.page, this.scrollTime / changePage)
         this.$emit('currentPage', this.page)
-      }
-    },
-    mounted() {
-      this.$nextTick(() => {
-        this._initFullPage()
-      })
-      document.documentElement.clientWidth <= 450 ? this.touched = true : this.touched = false
-      window.addEventListener('resize', () => {
-        this._initFullPage()
-        document.documentElement.clientWidth <= 450 ? this.touched = true : this.touched = false
-      })
-      if (this.isScroll) {
+      },
+      setTouched() {
+        let width = this.isPC() ? document.documentElement.clientWidth : window.screen.width
+        width <= 450 ? this.touched = true : this.touched = false
+        if (width <= 450) {
+          this.touched = true
+
+          this._initFullPage()
+        } else {
+          this.touched = false
+        }
+        window.addEventListener('resize', () => {
+          this._initFullPage()
+          if (width <= 450) {
+            this.touched = true
+            this._initFullPage()
+          } else {
+            this.touched = false
+          }
+        })
+      },
+      scrollMouseWheel() {
         setTimeout(() => {
           this.$emit('currentPage', this.page)
         }, 20)
@@ -217,6 +242,8 @@
             return
           }
           ev = ev || event
+          ev.preventDefault()
+          window.scrollTo(0, this.getScrollTop())
           this.start = new Date().getTime()
           let delta = ev.wheelDelta || -ev.detail
           if (this.end - this.start < -this.scrollTime) {
@@ -247,7 +274,8 @@
             ev.preventDefault()
           }
         })
-      } else {
+      },
+      translateMouseWheel() {
         setTimeout(() => {
           this.$emit('currentPage', this.page)
         }, 20)
@@ -285,6 +313,13 @@
           }
         })
       }
+    },
+    mounted() {
+      this.$nextTick(() => {
+        this._initFullPage()
+      })
+      this.setTouched()
+      this.isScroll ? this.scrollMouseWheel() : this.translateMouseWheel()
     },
     watch: {
       toPage(val) {
