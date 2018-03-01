@@ -1,6 +1,6 @@
 {
   "name": "vue-fullpages",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "fullpage in vue.js",
   "main": "index.js",
   "scripts": {

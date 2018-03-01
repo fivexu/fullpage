@@ -339,44 +339,44 @@
   }
 </script>
 
-<style lang="less" scoped rel="stylesheet/less">
+<style scoped rel="stylesheet/css">
   .fullpage {
     width: 100%;
     height: 100%;
-    .translatePage {
-      width: 100%;
-      height: 100%;
-      transform: translate(0px, 0px, 0px);
-    }
-    .fullpages {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-    .dot {
-      position: fixed;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      z-index: 10000;
-      margin: auto 0;
-      height: fit-content;
-      width: 20px;
-      display: flex;
-      flex-direction: column;
-      flex-wrap: nowrap;
-      justify-content: space-between;
-      .dots {
-        cursor: pointer;
-        margin: 10px auto;
-        border: 1px solid #54beed;
-        border-radius: 50%;
-        transition: all 0.3s;
-        &.ac {
-          background-color: #54beed;
-          border: 1px solid #54beed;
-        }
-      }
-    }
+  }
+  .fullpage .translatePage {
+    width: 100%;
+    height: 100%;
+    transform: translate3d(0, 0, 0);
+  }
+  .fullpage .fullpages {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .fullpage .dot {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 10000;
+    margin: auto 0;
+    height: fit-content;
+    width: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+  .fullpage .dot .dots {
+    cursor: pointer;
+    margin: 10px auto;
+    border: 1px solid #54beed;
+    border-radius: 50%;
+    transition: all 0.3s;
+  }
+  .fullpage .dot .dots.ac {
+    background-color: #54beed;
+    border: 1px solid #54beed;
   }
 </style>
